@@ -27,6 +27,7 @@ namespace Zau.BookStore
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             //app.Use(async (context, next) =>
             //{
             //    await context.Response.WriteAsync("Hello from my first middleware. ");
