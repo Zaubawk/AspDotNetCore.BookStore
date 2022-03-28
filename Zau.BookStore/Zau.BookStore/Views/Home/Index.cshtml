@@ -1,29 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    Layout = null;
+﻿@{ ViewData["Title"] = "Home"; }
+@inject Zau.BookStore.Repository.IBookRepository _bookRepository
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1>Welcome to Bookstore</h1>
+        <p class="lead text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+        <p>
+            <a href="#" class="btn btn-primary my-2">Search books</a>
+        </p>
+
+        @foreach (var item in await _bookRepository.GetAllBooks())
+            {
+                <h2>@item.Title</h2>
+            }
+    </div>
+</section>
+
+
+<div class="py-5 bg-light">
+    <div class="container">
+        <h3 class="h3">Top books</h3>
+        @await Component.InvokeAsync("TopBooks", new { count = 3 })
+
+        @*<vc:top-books count="3" ></vc:top-books>*@
+
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //alert("document is ready");
+        })
+    </script>
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
-</head>
-
-<body class="container">
-    <img src="~/images/logo.png" class="logo" alt="Logo" />
-    <h1>Welcome to Zau's Book store application</h1>
-</body>
-<script src="~/lib/jquery/jquery.js"></script>
-</html>
-
-<script>
-    $(document).ready(function () {
-        alert("Page loaded");
-    })
-</script>
